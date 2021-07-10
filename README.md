@@ -1,6 +1,5 @@
 # List_github_repo
 
-Ce projet permet de lister tout les repo public d'un compte github 
+this projet is for show your github repos in list group object with the github api 
 
-
-MISE A JOUR DEMAIN 
+exemple in my portfolio website : https://maxence-schroeder.xyz/#portfolios
