@@ -1,53 +1,39 @@
-//Listing all the repositories
-
-function requestUserRepos(username){
-
+   
     // Create new XMLHttpRequest object
     const xhr = new XMLHttpRequest();
-
+    
     // GitHub endpoint, dynamically passing in specified username
-    const url = `https://api.github.com/users/Maxence=schroeder01/repos?per_page=30`;
+    const url = `https://api.github.com/users/Maxence-schroeder01/repos`;
 
     // Open a new connection, using a GET request via URL endpoint
     // Providing 3 arguments (GET/POST, The URL, Async True/False)
     xhr.open('GET', url, true);
-
+    
     // When request is received
     // Process it here
-    xhr.onload = function () {
-
+    xhr.onload = function() {
+        var outhtml = '';
         // Parse API data into JSON
-        const data = JSON.parse(this.response);
-      
-      
-        // Loop over each object in data array
-        for (let i in data) {
+        const datas = JSON.parse(this.response);
+        datas.forEach(data => {
+           outhtml = outhtml + (`
 
-            // Get the ul with id of of userRepos
-            let ul = document.getElementById('userRepos');
+            <div class="card">
+            <div class="box">
+            <div class="content">
+                <h1>${data.name}</h1>
+                <h5> ${data.description}</h5>
+                <p><a href="${data.html_url}">Pour en Savoir Plus</a></p>
+                <h6><strong>Langage : </strong>${data.language}</h6>
 
-            // Create variable that will create li's to be added to ul
-            let li = document.createElement('li');
-
-            // Add Bootstrap list item class to each li
-            li.classList.add('list-group-item')
-
-            // Create the html markup for each li
-            li.innerHTML = (`
-                <p><a href="${data[i].html_url}"><div><strong>${data[i].name} </strong> (${data[i].language})</a></p>
+                </div>
+                </div>
+                </div>
             `);
-         
-          
-
-            // Append each li to the ul
-            ul.appendChild(li);
-
-        }
-
+        });
+        document.getElementById('ghapidata').innerHTML = outhtml;
+    
     }
-
+    
     // Send the request to the server
-    xhr.send();
-
-}
-requestUserRepos('Curious-Yu');
+    xhr.send()
